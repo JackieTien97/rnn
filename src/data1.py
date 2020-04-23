@@ -79,18 +79,20 @@ class Corpus(object):
         return ' '.join([self.vocabulary[i] for i in ids])
 
 if __name__ == '__main__':
-    corpus = Corpus('../data/ptb', {'train': 20, 'valid': 10}, 35)
-    corpus.set_train()
-    batch_data, batch_target, _ = corpus.get_batch()
-
-    tmp_data = batch_data.cpu().numpy()
-    tmp_target = batch_target.cpu().numpy()
-    print(tmp_data[:, 0])
-    print(tmp_target[:, 0])
-    print(tmp_data[:, 1])
-    print(tmp_target[:, 1])
-
-    print(corpus.get_sentence(tmp_data[:, 0]))
-    print(corpus.get_sentence(tmp_target[:, 0]))
-    print(corpus.get_sentence(tmp_data[:, 1]))
-    print(corpus.get_sentence(tmp_target[:, 1]))
+    # corpus = Corpus('../data/ptb', {'train': 20, 'valid': 10}, 35)
+    # corpus.set_train()
+    # batch_data, batch_target, _ = corpus.get_batch()
+    #
+    # tmp_data = batch_data.cpu().numpy()
+    # tmp_target = batch_target.cpu().numpy()
+    # print(tmp_data[:, 0])
+    # print(tmp_target[:, 0])
+    # print(tmp_data[:, 1])
+    # print(tmp_target[:, 1])
+    #
+    # print(corpus.get_sentence(tmp_data[:, 0]))
+    # print(corpus.get_sentence(tmp_target[:, 0]))
+    # print(corpus.get_sentence(tmp_data[:, 1]))
+    # print(corpus.get_sentence(tmp_target[:, 1]))
+    a = float('inf')
+    print(1 < a)

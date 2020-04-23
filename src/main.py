@@ -25,6 +25,7 @@ def repackage_hidden(h):
 def evaluate(rnn_model, valid_data, device):
     rnn_model.eval()
     total_loss = 0.
+    total_correct = 0
     valid_loader = iter(valid_data)
     total_count = 0.
     with torch.no_grad():
@@ -35,11 +36,14 @@ def evaluate(rnn_model, valid_data, device):
             hidden = repackage_hidden(hidden)
             output, hidden = rnn_model(batch_data, hidden)
             loss = criterion(output.view(-1, VOCAB_SIZE), batch_target.view(-1))
+            _, predictions = torch.max(output.view(-1, VOCAB_SIZE), 1)
             total_count += np.multiply(*batch_data.size())
             total_loss += loss.item() * np.multiply(*batch_data.size())
+            total_correct += torch.sum(predictions == batch_target.view(-1).data)
 
     loss = total_loss / total_count
-    return np.exp(loss)
+    epoch_acc = total_correct.double() / total_count
+    return np.exp(loss), epoch_acc.item()
 
 
 ########################################
@@ -53,7 +57,8 @@ def train(rnn_model, train_data, optim, sched, device):
     train_loader = iter(train_data)
     hidden = rnn_model.init_hidden(batch_size)
     total_loss = 0.0
-    total_size = 0.0
+    total_correct = 0
+    total_count = 0.0
     for i, batch in enumerate(train_loader):
         batch_data, batch_target = batch.text, batch.target
         batch_data, batch_target = batch_data.to(device), batch_target.to(device)
@@ -61,15 +66,19 @@ def train(rnn_model, train_data, optim, sched, device):
         rnn_model.zero_grad()
         output, hidden = rnn_model(batch_data, hidden)
         loss = criterion(output.view(-1, VOCAB_SIZE), batch_target.view(-1))
+        _, predictions = torch.max(output.view(-1, VOCAB_SIZE), 1)
         loss.backward()
         torch.nn.utils.clip_grad_norm_(rnn_model.parameters(), GRAD_CLIP)  # CLIP,防止梯度爆炸
         optim.step()
-        total_loss += loss.item() * batch_data.size(1)
-        total_size += batch_data.size(1)
+
+        total_loss += loss.item() * np.multiply(*batch_data.size())
+        total_correct += torch.sum(predictions == batch_target.view(-1).data)
+        total_count += np.multiply(*batch_data.size())
 
     sched.step()
-    epoch_loss = total_loss / total_size
-    return epoch_loss
+    epoch_loss = total_loss / total_count
+    epoch_acc = total_correct.double() / total_count
+    return epoch_loss, epoch_acc.item()
 
 
 if __name__ == '__main__':
@@ -116,26 +125,40 @@ if __name__ == '__main__':
 
     save_directory = '../best_model/'
     train_loss_array = []
+    train_acc_array = []
     valid_loss_array = []
-    best_loss = float('inf')
+    valid_acc_array = []
+    best_acc = 0.0
     # Loop over epochs.
     for epoch in range(1, num_epochs + 1):
         print('epoch:{:d}/{:d}'.format(epoch, num_epochs))
         print('*' * 100)
-        train_loss = train(MyModel, train_iter, optimizer, scheduler, device)
+        train_loss, train_acc = train(MyModel, train_iter, optimizer, scheduler, device)
+        train_acc_array.append(train_acc)
         train_loss_array.append(train_loss)
-        print("training loss: {:.4f}".format(train_loss))
-        valid_loss = evaluate(MyModel, val_iter, device)
+        print("training: {:.4f}, {:.4f}".format(train_loss, train_acc))
+        valid_loss, valid_acc = evaluate(MyModel, val_iter, device)
+        valid_acc_array.append(valid_acc)
         valid_loss_array.append(valid_loss)
-        print("validation perplexity: {:.4f}".format(valid_loss))
-        if valid_loss < best_loss:
-            best_acc = valid_loss
+        print("validation: {:.4f}, {:.4f}".format(valid_loss, valid_acc))
+        if valid_acc > best_acc:
+            best_acc = valid_acc
             best_model = MyModel
             torch.save(best_model, os.path.join(save_directory, 'best_model.pt'))
 
-    print("train_loss_array: ", train_loss_array)
-    print("valid_loss_array: ", valid_loss_array)
-    print("best validation perplexity is: {:.4f}".format(best_loss))
+    print("train_acc_array: ", train_acc_array)
+    print("valid_acc_array: ", valid_acc_array)
+    print("best validation accuracy is: {:.4f}".format(best_acc))
+
+    plt.figure()
+    plt.title("Training and Validation Accuracy vs. Number of Training Epochs")
+    plt.xlabel("Training Epochs")
+    plt.ylabel("Accuracy")
+    plt.plot(range(1, num_epochs + 1), train_acc_array, label="Training")
+    plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
+    plt.xticks(np.arange(1, num_epochs + 1, 20.0))
+    plt.legend()
+    plt.savefig('Accuracy.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
