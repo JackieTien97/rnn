@@ -6,19 +6,23 @@ class LMModel(nn.Module):
     # The word embedding layer have input as a sequence of word index (in the vocabulary) and output a sequence of vector where each one is a word embedding. 
     # The rnn network has input of each word embedding and output a hidden feature corresponding to each word embedding.
     # The output layer has input as the hidden feature and output the probability of each word in the vocabulary.
-    def __init__(self, nvoc, ninput, nhid, nlayers, dropout=0.5):
+    def __init__(self, nvoc, ninput, nhid, nlayers, dropout=0.5, bidirectional=False):
         super(LMModel, self).__init__()
         self.drop = nn.Dropout(dropout)
         self.encoder = nn.Embedding(nvoc, ninput)
         # WRITE CODE HERE witnin two '#' bar
         ########################################
         # Construct you RNN best_model here. You can add additional parameters to the function.
-        self.rnn = nn.GRU(ninput, nhid, nlayers, dropout=dropout)
+        self.rnn = nn.GRU(ninput, nhid, nlayers, dropout=dropout, bidirectional=bidirectional)
         ########################################
-        self.decoder = nn.Linear(nhid, nvoc)
+        if bidirectional:
+            self.decoder = nn.Linear(2 * nhid, nvoc)
+        else:
+            self.decoder = nn.Linear(nhid, nvoc)
         self.init_weights()
         self.nhid = nhid
         self.nlayers = nlayers
+        self.bidirectional = bidirectional
 
     def init_weights(self):
         init_uniform = 0.1
@@ -42,4 +46,7 @@ class LMModel(nn.Module):
 
     def init_hidden(self, batch_size, requires_grad=True):
         weight = next(self.parameters())
-        return weight.new_zeros(self.nlayers, batch_size, self.nhid, requires_grad=requires_grad)
+        if self.bidirectional:
+            return weight.new_zeros(self.nlayers * 2, batch_size, self.nhid, requires_grad=requires_grad)
+        else:
+            return weight.new_zeros(self.nlayers, batch_size, self.nhid, requires_grad=requires_grad)

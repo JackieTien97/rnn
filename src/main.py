@@ -100,7 +100,7 @@ if __name__ == '__main__':
     embedding_size = 128
     hidden_size = 256
     layer_number = 5
-    MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, 0.0)
+    MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, 0.0, True)
     print(MyModel)
     MyModel.to(device)
     ########################################
