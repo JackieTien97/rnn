@@ -64,8 +64,8 @@ def train(rnn_model, train_data, optim, sched, device):
         loss.backward()
         torch.nn.utils.clip_grad_norm_(rnn_model.parameters(), GRAD_CLIP)  # CLIP,防止梯度爆炸
         optim.step()
-        total_loss += loss.item() * batch_data.size(0)
-        total_size += batch_data.size(0)
+        total_loss += loss.item() * batch_data.size(1)
+        total_size += batch_data.size(1)
 
     sched.step()
     epoch_loss = total_loss / total_size
@@ -77,8 +77,8 @@ if __name__ == '__main__':
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!START!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     num_epochs = 200
-    batch_size = 32
-    bptt_len = 32
+    batch_size = 20
+    bptt_len = 35
     SEED = 12345
 
     print("num_epochs: ", num_epochs)
@@ -99,7 +99,7 @@ if __name__ == '__main__':
     # Build LMModel best_model (build your language best_model here)
     embedding_size = 128
     hidden_size = 256
-    layer_number = 2
+    layer_number = 5
     MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, 0.7)
     print(MyModel)
     MyModel.to(device)
