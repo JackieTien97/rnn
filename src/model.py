@@ -2,7 +2,7 @@ import torch.nn as nn
 
 
 class LMModel(nn.Module):
-    # Language model is composed of three parts: a word embedding layer, a rnn network and a output layer. 
+    # Language best_model is composed of three parts: a word embedding layer, a rnn network and a output layer.
     # The word embedding layer have input as a sequence of word index (in the vocabulary) and output a sequence of vector where each one is a word embedding. 
     # The rnn network has input of each word embedding and output a hidden feature corresponding to each word embedding.
     # The output layer has input as the hidden feature and output the probability of each word in the vocabulary.
@@ -12,7 +12,7 @@ class LMModel(nn.Module):
         self.encoder = nn.Embedding(nvoc, ninput)
         # WRITE CODE HERE witnin two '#' bar
         ########################################
-        # Construct you RNN model here. You can add additional parameters to the function.
+        # Construct you RNN best_model here. You can add additional parameters to the function.
         self.rnn = nn.GRU(ninput, nhid, nlayers, dropout=dropout)
         ########################################
         self.decoder = nn.Linear(nhid, nvoc)

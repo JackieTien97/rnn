@@ -96,7 +96,7 @@ if __name__ == '__main__':
 
     # WRITE CODE HERE within two '#' bar
     ########################################
-    # Build LMModel model (build your language model here)
+    # Build LMModel best_model (build your language best_model here)
     embedding_size = 128
     hidden_size = 256
     layer_number = 3
@@ -114,7 +114,7 @@ if __name__ == '__main__':
 
     ########################################
 
-    save_directory = '../model/'
+    save_directory = '../best_model/'
     train_loss_array = []
     valid_loss_array = []
     best_loss = float('inf')
@@ -130,7 +130,7 @@ if __name__ == '__main__':
         print("validation perplexity: {:.4f}".format(valid_loss))
         if valid_loss < best_loss:
             best_acc = valid_loss
-            best_model = model
+            best_model = best_model
             torch.save(best_model, os.path.join(save_directory, 'best_model.pt'))
 
     print("train_loss_array: ", train_loss_array)
