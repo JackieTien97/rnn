@@ -15,8 +15,10 @@ SEED = 12345
 # Set the random seed manually for reproducibility.
 torch.manual_seed(SEED)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+print("torch.cuda.is_available(): ", torch.cuda.is_available())
 # load data
 train_iter, val_iter, VOCAB_SIZE = data.get_data("../data/ptb/", batch_size, bptt_len, device)
+print("VOCAB_SIZE: ", VOCAB_SIZE)
 
 
 def repackage_hidden(h):
