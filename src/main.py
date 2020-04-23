@@ -77,7 +77,7 @@ if __name__ == '__main__':
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!START!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     num_epochs = 200
-    batch_size = 16
+    batch_size = 32
     bptt_len = 32
     SEED = 12345
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
     # Build LMModel best_model (build your language best_model here)
     embedding_size = 128
     hidden_size = 256
-    layer_number = 3
+    layer_number = 2
     MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, 0.7)
     print(MyModel)
     MyModel.to(device)
