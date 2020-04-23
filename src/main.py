@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!START!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-    num_epochs = 200
+    num_epochs = 100
     batch_size = 20
     bptt_len = 35
     SEED = 12345
@@ -109,21 +109,21 @@ if __name__ == '__main__':
     embedding_size = 128
     hidden_size = 256
     layer_number = 5
-    MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, 0.0, True)
+    MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, 0.5, True)
     print(MyModel)
     MyModel.to(device)
     ########################################
 
     criterion = nn.CrossEntropyLoss()
     learning_rate = 0.001
-    step_size = 20
+    step_size = 30
     optimizer = torch.optim.Adam(MyModel.parameters(), lr=learning_rate)
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.5)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.1)
     GRAD_CLIP = 1
 
     ########################################
 
-    save_directory = '../best_model/'
+    save_directory = '../best_model/with_dropout/'
     train_loss_array = []
     train_acc_array = []
     valid_loss_array = []
@@ -158,7 +158,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Accuracy.jpg')
+    plt.savefig('Accuracy_with_dropout.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -168,6 +168,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Loss.jpg')
+    plt.savefig('Loss_with_dropout.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
