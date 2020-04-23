@@ -130,7 +130,7 @@ if __name__ == '__main__':
         print("validation perplexity: {:.4f}".format(valid_loss))
         if valid_loss < best_loss:
             best_acc = valid_loss
-            best_model = best_model
+            best_model = MyModel
             torch.save(best_model, os.path.join(save_directory, 'best_model.pt'))
 
     print("train_loss_array: ", train_loss_array)
