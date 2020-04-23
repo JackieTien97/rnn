@@ -12,8 +12,14 @@ num_epochs = 200
 batch_size = 16
 bptt_len = 32
 SEED = 12345
+
+print("num_epochs: ", num_epochs)
+print("batch_size: ", batch_size)
+print("bptt_len: ", bptt_len)
+
 # Set the random seed manually for reproducibility.
 torch.manual_seed(SEED)
+print("seed: ", SEED)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print("torch.cuda.is_available(): ", torch.cuda.is_available())
 # load data
