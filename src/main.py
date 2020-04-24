@@ -108,7 +108,7 @@ if __name__ == '__main__':
     # Build LMModel best_model (build your language best_model here)
     embedding_size = 128
     hidden_size = 256
-    layer_number = 5
+    layer_number = 3
     MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, bidirectional=True)
     print(MyModel)
     MyModel.to(device)
@@ -129,6 +129,7 @@ if __name__ == '__main__':
     valid_loss_array = []
     valid_acc_array = []
     best_acc = 0.0
+    best_train_acc = 0.0
     # Loop over epochs.
     for epoch in range(1, num_epochs + 1):
         print('epoch:{:d}/{:d}'.format(epoch, num_epochs))
@@ -141,13 +142,16 @@ if __name__ == '__main__':
         valid_acc_array.append(valid_acc)
         valid_loss_array.append(valid_loss)
         print("validation: {:.4f}, {:.4f}".format(valid_loss, valid_acc))
+        if train_acc > best_train_acc:
+            best_train_acc = train_acc
         if valid_acc > best_acc:
             best_acc = valid_acc
             best_model = MyModel
-            torch.save(best_model, os.path.join(save_directory, 'best_model_no_dropout_in_gru.pt'))
+            torch.save(best_model, os.path.join(save_directory, 'best_model_no_dropout_in_gru_layer3.pt'))
 
     print("train_acc_array: ", train_acc_array)
     print("valid_acc_array: ", valid_acc_array)
+    print("best train accuracy is: {:.4f}".format(best_train_acc))
     print("best validation accuracy is: {:.4f}".format(best_acc))
 
     plt.figure()
@@ -158,7 +162,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Accuracy.jpg')
+    plt.savefig('Accuracy_layer3.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -168,6 +172,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Loss.jpg')
+    plt.savefig('Loss_layer3.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
