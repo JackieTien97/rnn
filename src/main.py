@@ -144,7 +144,7 @@ if __name__ == '__main__':
         if valid_acc > best_acc:
             best_acc = valid_acc
             best_model = MyModel
-            torch.save(best_model, os.path.join(save_directory, 'best_model.pt'))
+            torch.save(best_model, os.path.join(save_directory, 'best_model_no_dropout_in_gru.pt'))
 
     print("train_acc_array: ", train_acc_array)
     print("valid_acc_array: ", valid_acc_array)
@@ -153,7 +153,7 @@ if __name__ == '__main__':
     plt.figure()
     plt.title("Training and Validation Accuracy vs. Number of Training Epochs")
     plt.xlabel("Training Epochs")
-    plt.ylabel("Accuracy")
+    plt.ylabel("Accuracy_without_dropout_in_gru")
     plt.plot(range(1, num_epochs + 1), train_acc_array, label="Training")
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
@@ -163,7 +163,7 @@ if __name__ == '__main__':
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
     plt.xlabel("Training Epochs")
-    plt.ylabel("Loss")
+    plt.ylabel("Loss_without_dropout_in_gru")
     plt.plot(range(1, num_epochs + 1), train_loss_array, label="Training")
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
