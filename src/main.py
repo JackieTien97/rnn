@@ -86,8 +86,8 @@ if __name__ == '__main__':
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!START!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     num_epochs = 100
-    batch_size = 20
-    bptt_len = 35
+    batch_size = 16
+    bptt_len = 32
     SEED = 12345
 
     print("num_epochs: ", num_epochs)
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     embedding_size = 128
     hidden_size = 256
     layer_number = 5
-    MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, 0.5, True)
+    MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, 0.0, True)
     print(MyModel)
     MyModel.to(device)
     ########################################
@@ -123,7 +123,7 @@ if __name__ == '__main__':
 
     ########################################
 
-    save_directory = '../best_model/with_dropout/'
+    save_directory = '../best_model/without_dropout/'
     train_loss_array = []
     train_acc_array = []
     valid_loss_array = []
@@ -158,7 +158,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Accuracy_with_dropout.jpg')
+    plt.savefig('Accuracy.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -168,6 +168,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Loss_with_dropout.jpg')
+    plt.savefig('Loss.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
