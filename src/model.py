@@ -13,7 +13,7 @@ class LMModel(nn.Module):
         # WRITE CODE HERE witnin two '#' bar
         ########################################
         # Construct you RNN best_model here. You can add additional parameters to the function.
-        self.rnn = nn.GRU(ninput, nhid, nlayers, dropout=dropout, bidirectional=bidirectional)
+        self.rnn = nn.GRU(ninput, nhid, nlayers, bidirectional=bidirectional)
         ########################################
         if bidirectional:
             self.decoder = nn.Linear(2 * nhid, nvoc)

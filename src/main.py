@@ -86,7 +86,7 @@ if __name__ == '__main__':
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!START!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
     num_epochs = 100
-    batch_size = 16
+    batch_size = 32
     bptt_len = 32
     SEED = 12345
 
@@ -109,16 +109,16 @@ if __name__ == '__main__':
     embedding_size = 128
     hidden_size = 256
     layer_number = 5
-    MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, 0.0, True)
+    MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, bidirectional=True)
     print(MyModel)
     MyModel.to(device)
     ########################################
 
     criterion = nn.CrossEntropyLoss()
     learning_rate = 0.001
-    step_size = 30
+    step_size = 20
     optimizer = torch.optim.Adam(MyModel.parameters(), lr=learning_rate)
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.1)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.5)
     GRAD_CLIP = 1
 
     ########################################
