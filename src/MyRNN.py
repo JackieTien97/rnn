@@ -47,10 +47,6 @@ class GRUCell(nn.Module):
         self.W_hz = nn.Parameter(torch.randn_like(self.W_hc), True)
         self.b_z = nn.Parameter(torch.randn_like(self.b_c), True)
 
-        # Hidden -> Output
-        # self.Why = nn.Parameter(torch.randn((hidden_size, input_size)), True)
-        # self.by = nn.Parameter(torch.zeros(input_size), True)
-
     def forward(self, x):
         # Gate updates
         update_gate = F.sigmoid((self.W_xz @ x) + (self.W_hz @ self.h + self.b_z))
@@ -60,3 +56,4 @@ class GRUCell(nn.Module):
 
         self.h = torch.mul(1 - update_gate, self.h) + torch.mul(update_gate, h_candidate)
         y_output = self.h @ self.Why + self.by
+        return y_output
