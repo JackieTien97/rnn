@@ -87,7 +87,7 @@ if __name__ == '__main__':
 
     num_epochs = 100
     batch_size = 32
-    bptt_len = 32
+    bptt_len = 48
     SEED = 12345
 
     print("num_epochs: ", num_epochs)
