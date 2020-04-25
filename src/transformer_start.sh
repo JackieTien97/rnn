@@ -1,1 +1,1 @@
-nohup python3 -u main.py > log_transformer_layer3_bptt64.txt 2>&1 &
+nohup python3 -u transformer_main.py > log_transformer_layer3_bptt64.txt 2>&1 &
