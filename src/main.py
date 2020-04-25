@@ -123,7 +123,7 @@ if __name__ == '__main__':
 
     ########################################
 
-    save_directory = '../best_model/without_drop/'
+    save_directory = '../best_model/without_dropout/'
     train_loss_array = []
     train_acc_array = []
     valid_loss_array = []
