@@ -68,7 +68,7 @@ def train(rnn_model, train_data, optim, sched, device):
         loss = criterion(output.view(-1, VOCAB_SIZE), batch_target.view(-1))
         _, predictions = torch.max(output.view(-1, VOCAB_SIZE), 1)
         loss.backward()
-        torch.nn.utils.clip_grad_norm_(rnn_model.parameters(), GRAD_CLIP)  # CLIP,防止梯度爆炸
+        # torch.nn.utils.clip_grad_norm_(rnn_model.parameters(), GRAD_CLIP)  # CLIP,防止梯度爆炸
         optim.step()
 
         total_loss += loss.item() * np.multiply(*batch_data.size())
@@ -123,7 +123,7 @@ if __name__ == '__main__':
 
     ########################################
 
-    save_directory = '../best_model/without_dropout/'
+    save_directory = '../best_model/without_clip/'
     train_loss_array = []
     train_acc_array = []
     valid_loss_array = []
@@ -157,21 +157,21 @@ if __name__ == '__main__':
     plt.figure()
     plt.title("Training and Validation Accuracy vs. Number of Training Epochs")
     plt.xlabel("Training Epochs")
-    plt.ylabel("Accuracy_without_dropout_in_gru")
+    plt.ylabel("Accuracy")
     plt.plot(range(1, num_epochs + 1), train_acc_array, label="Training")
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Accuracy_layer3.jpg')
+    plt.savefig('Accuracy_layer3_without_clip.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
     plt.xlabel("Training Epochs")
-    plt.ylabel("Loss_without_dropout_in_gru")
+    plt.ylabel("Loss")
     plt.plot(range(1, num_epochs + 1), train_loss_array, label="Training")
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Loss_layer3.jpg')
+    plt.savefig('Loss_layer3_without_clip.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
