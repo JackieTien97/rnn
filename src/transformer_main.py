@@ -99,7 +99,7 @@ if __name__ == '__main__':
     nhid = 256
     nlayers = 3
     nhead = 2
-    dropout = 0.2
+    dropout = 0.1
     MyModel = model.TransformerModel(VOCAB_SIZE, emsize, nhead, nhid, nlayers, dropout)
     print(MyModel)
     MyModel.to(device)
