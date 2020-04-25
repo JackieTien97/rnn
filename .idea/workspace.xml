@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d7a4ba6-99d8-45e5-a76c-3592b8d088c6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/start.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,11 +25,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="168" column="33" lean-forward="true" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
+            <state relative-caret-position="42">
+              <caret line="89" column="17" selection-start-line="89" selection-start-column="17" selection-end-line="89" selection-end-column="17" />
               <folding>
                 <element signature="e#16#34#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/start.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="66" lean-forward="true" selection-start-column="66" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -81,6 +91,7 @@
         <option value="$PROJECT_DIR$/src/data.py" />
         <option value="$PROJECT_DIR$/src/data1.py" />
         <option value="$PROJECT_DIR$/src/model.py" />
+        <option value="$PROJECT_DIR$/start.sh" />
         <option value="$PROJECT_DIR$/src/main.py" />
       </list>
     </option>
@@ -244,12 +255,12 @@
       <option name="presentableId" value="Default" />
       <updated>1587520782649</updated>
       <workItem from="1587520786392" duration="3221000" />
-      <workItem from="1587558131553" duration="28625000" />
+      <workItem from="1587558131553" duration="28908000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31846000" />
+    <option name="totallyTimeSpent" value="32129000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="138" y="23" width="1061" height="877" extended-state="0" />
@@ -281,6 +292,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.sh" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/rnn$test.coverage" NAME="test Coverage Results" MODIFIED="1587624335819" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
@@ -439,13 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/Accuracy_layer3.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -473,10 +480,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="66" lean-forward="true" selection-start-column="66" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="168" column="33" lean-forward="true" selection-start-line="168" selection-start-column="33" selection-end-line="168" selection-end-column="33" />
+        <state relative-caret-position="42">
+          <caret line="89" column="17" selection-start-line="89" selection-start-column="17" selection-end-line="89" selection-end-column="17" />
           <folding>
             <element signature="e#16#34#0" expanded="true" />
           </folding>

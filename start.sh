@@ -1,0 +1,1 @@
+nohup python3 -u main.py > log_without_dropout_in_gru_layer3_bptt64.txt 2>&1 &

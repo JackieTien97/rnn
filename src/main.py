@@ -68,7 +68,7 @@ def train(rnn_model, train_data, optim, sched, device):
         loss = criterion(output.view(-1, VOCAB_SIZE), batch_target.view(-1))
         _, predictions = torch.max(output.view(-1, VOCAB_SIZE), 1)
         loss.backward()
-        # torch.nn.utils.clip_grad_norm_(rnn_model.parameters(), GRAD_CLIP)  # CLIP,防止梯度爆炸
+        torch.nn.utils.clip_grad_norm_(rnn_model.parameters(), GRAD_CLIP)  # CLIP,防止梯度爆炸
         optim.step()
 
         total_loss += loss.item() * np.multiply(*batch_data.size())
@@ -87,7 +87,7 @@ if __name__ == '__main__':
 
     num_epochs = 100
     batch_size = 32
-    bptt_len = 48
+    bptt_len = 64
     SEED = 12345
 
     print("num_epochs: ", num_epochs)
@@ -123,7 +123,7 @@ if __name__ == '__main__':
 
     ########################################
 
-    save_directory = '../best_model/without_clip/'
+    save_directory = '../best_model/without_drop/'
     train_loss_array = []
     train_acc_array = []
     valid_loss_array = []
@@ -162,7 +162,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Accuracy_layer3_without_clip_bptt48.jpg')
+    plt.savefig('Accuracy_layer3_bptt48.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -172,6 +172,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Loss_layer3_without_clip_bptt48.jpg')
+    plt.savefig('Loss_layer3_bptt48.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
