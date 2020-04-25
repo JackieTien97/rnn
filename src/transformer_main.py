@@ -99,7 +99,7 @@ if __name__ == '__main__':
     nhid = 256
     nlayers = 3
     nhead = 2
-    dropout = 0.1
+    dropout = 0.2
     MyModel = model.TransformerModel(VOCAB_SIZE, emsize, nhead, nhid, nlayers, dropout)
     print(MyModel)
     MyModel.to(device)
@@ -153,7 +153,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Accuracy_layer3_bptt64.jpg')
+    plt.savefig('Transformer_Accuracy_layer3_bptt64_dropout_0_2.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -163,6 +163,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Loss_layer3_bptt64.jpg')
+    plt.savefig('Transformer_Loss_layer3_bptt64_dropout_0_2.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
