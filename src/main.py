@@ -147,7 +147,7 @@ if __name__ == '__main__':
         if valid_acc > best_acc:
             best_acc = valid_acc
             best_model = MyModel
-            torch.save(best_model, os.path.join(save_directory, 'best_model_no_dropout_in_gru_layer3.pt'))
+            torch.save(best_model, os.path.join(save_directory, 'best_model_no_dropout_in_gru_layer3_bptt48.pt'))
 
     print("train_acc_array: ", train_acc_array)
     print("valid_acc_array: ", valid_acc_array)
@@ -162,7 +162,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Accuracy_layer3_without_clip.jpg')
+    plt.savefig('Accuracy_layer3_without_clip_bptt48.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -172,6 +172,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Loss_layer3_without_clip.jpg')
+    plt.savefig('Loss_layer3_without_clip_bptt48.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
