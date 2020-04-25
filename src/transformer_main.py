@@ -109,7 +109,7 @@ if __name__ == '__main__':
     learning_rate = 0.001
     step_size = 20
     optimizer = torch.optim.Adam(MyModel.parameters(), lr=learning_rate)
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.5)
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.3)
     GRAD_CLIP = 0.5
 
     ########################################
