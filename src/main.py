@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import os
 from matplotlib import pyplot as plt
+from nltk.translate.bleu_score import corpus_bleu
 
 import data
 import model
@@ -28,6 +29,8 @@ def evaluate(rnn_model, valid_data, device):
     total_correct = 0
     valid_loader = iter(valid_data)
     total_count = 0.
+    total_bleu_score = 0.
+    total_bleu_count = 0.
     with torch.no_grad():
         hidden = rnn_model.init_hidden(batch_size, requires_grad=False)
         for i, batch in enumerate(valid_loader):
@@ -40,10 +43,16 @@ def evaluate(rnn_model, valid_data, device):
             total_count += np.multiply(*batch_data.size())
             total_loss += loss.item() * np.multiply(*batch_data.size())
             total_correct += torch.sum(predictions == batch_target.view(-1).data)
+            total_bleu_count += batch_data.size(1)
+            total_bleu_score += corpus_bleu(
+                predictions.view(batch_target.size(0), batch_target.size(1)).t().unsqueeze(-1).cpu().detach().numpy(),
+                batch_target.t().cpu().detach().numpy()
+            ) * batch_data.size(1)
 
     loss = total_loss / total_count
     epoch_acc = total_correct.double() / total_count
-    return np.exp(loss), epoch_acc.item()
+    bleu_score = total_bleu_score / total_bleu_count
+    return np.exp(loss), epoch_acc.item(), bleu_score
 
 
 ########################################
@@ -70,7 +79,6 @@ def train(rnn_model, train_data, optim, sched, device):
         loss.backward()
         torch.nn.utils.clip_grad_norm_(rnn_model.parameters(), GRAD_CLIP)  # CLIP,防止梯度爆炸
         optim.step()
-
         total_loss += loss.item() * np.multiply(*batch_data.size())
         total_correct += torch.sum(predictions == batch_target.view(-1).data)
         total_count += np.multiply(*batch_data.size())
@@ -118,8 +126,8 @@ if __name__ == '__main__':
     learning_rate = 0.001
     step_size = 20
     optimizer = torch.optim.Adam(MyModel.parameters(), lr=learning_rate)
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.5)
-    GRAD_CLIP = 1
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.3)
+    GRAD_CLIP = 0.5
 
     ########################################
 
@@ -130,6 +138,7 @@ if __name__ == '__main__':
     valid_acc_array = []
     best_acc = 0.0
     best_train_acc = 0.0
+    best_bleu_score = 0.0
     # Loop over epochs.
     for epoch in range(1, num_epochs + 1):
         print('epoch:{:d}/{:d}'.format(epoch, num_epochs))
@@ -138,21 +147,24 @@ if __name__ == '__main__':
         train_acc_array.append(train_acc)
         train_loss_array.append(train_loss)
         print("training: {:.4f}, {:.4f}".format(train_loss, train_acc))
-        valid_loss, valid_acc = evaluate(MyModel, val_iter, device)
+        valid_loss, valid_acc, bleu_score = evaluate(MyModel, val_iter, device)
         valid_acc_array.append(valid_acc)
         valid_loss_array.append(valid_loss)
-        print("validation: {:.4f}, {:.4f}".format(valid_loss, valid_acc))
+        print("validation: {:.4f}, {:.4f}, {:.4f}".format(valid_loss, valid_acc, bleu_score))
+        if bleu_score > best_bleu_score:
+            best_bleu_score = bleu_score
         if train_acc > best_train_acc:
             best_train_acc = train_acc
         if valid_acc > best_acc:
             best_acc = valid_acc
             best_model = MyModel
-            torch.save(best_model, os.path.join(save_directory, 'best_model_no_dropout_in_gru_layer3_bptt48.pt'))
+            torch.save(best_model, os.path.join(save_directory, 'best_model_bleu_bptt64.pt'))
 
     print("train_acc_array: ", train_acc_array)
     print("valid_acc_array: ", valid_acc_array)
     print("best train accuracy is: {:.4f}".format(best_train_acc))
     print("best validation accuracy is: {:.4f}".format(best_acc))
+    print("best bleu score is: {:.4f}".format(best_bleu_score))
 
     plt.figure()
     plt.title("Training and Validation Accuracy vs. Number of Training Epochs")
@@ -162,7 +174,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Accuracy_layer3_bptt48.jpg')
+    plt.savefig('Accuracy_bleu_layer3_bptt64.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -172,6 +184,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Loss_layer3_bptt48.jpg')
+    plt.savefig('Loss_bleu_layer3_bptt64.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
