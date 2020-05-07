@@ -74,7 +74,7 @@ if __name__ == '__main__':
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!START!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-    num_epochs = 50
+    num_epochs = 40
     batch_size = 32
     bptt_len = 128
     SEED = 12345
@@ -97,8 +97,8 @@ if __name__ == '__main__':
     # Build LMModel best_model (build your language best_model here)
     emsize = 256
     nhid = 256
-    nlayers = 2
-    nhead = 2
+    nlayers = 5
+    nhead = 8
     dropout = 0.2
     MyModel = model.TransformerModel(VOCAB_SIZE, emsize, nhead, nhid, nlayers, dropout)
     print(MyModel)
@@ -107,7 +107,7 @@ if __name__ == '__main__':
 
     criterion = nn.CrossEntropyLoss()
     learning_rate = 0.001
-    step_size = 20
+    step_size = 5
     optimizer = torch.optim.Adam(MyModel.parameters(), lr=learning_rate)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.3)
     GRAD_CLIP = 0.5
@@ -139,7 +139,7 @@ if __name__ == '__main__':
         if valid_loss < best_pp:
             best_pp = valid_loss
             best_model = MyModel
-            torch.save(best_model, os.path.join(save_directory, 'best_model_layer2_bptt128_head2_em256.pt'))
+            torch.save(best_model, os.path.join(save_directory, 'best_model_layer5_bptt128_head8_em256.pt'))
         if valid_acc > best_acc:
             best_acc = valid_acc
 
@@ -157,7 +157,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Transformer_Accuracy_layer2_bptt128_head2_em256_dropout_0_2.jpg')
+    plt.savefig('Transformer_Accuracy_layer5_bptt128_head8_em256_dropout_0_2.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -167,6 +167,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Transformer_Loss_layer2_bptt128_head2_em256_dropout_0_2.jpg')
+    plt.savefig('Transformer_Loss_layer5_bptt128_head8_em256_dropout_0_2.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
