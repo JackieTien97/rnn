@@ -1,1 +1,1 @@
-nohup python3 -u transformer_main.py > log_transformer_without_bidirectional.txt 2>&1 &
+nohup python3 -u transformer_main.py > log_transformer_without_bidirectional_head_5_layer_5.txt 2>&1 &
