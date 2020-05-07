@@ -121,6 +121,7 @@ if __name__ == '__main__':
     valid_acc_array = []
     best_acc = 0.0
     best_train_acc = 0.0
+    best_pp = 9999999
     # Loop over epochs.
     for epoch in range(1, num_epochs + 1):
         print('epoch:{:d}/{:d}'.format(epoch, num_epochs))
@@ -135,15 +136,18 @@ if __name__ == '__main__':
         print("validation: {:.4f}, {:.4f}".format(valid_loss, valid_acc))
         if train_acc > best_train_acc:
             best_train_acc = train_acc
-        if valid_acc > best_acc:
-            best_acc = valid_acc
+        if valid_loss < best_pp:
+            best_pp = valid_loss
             best_model = MyModel
             torch.save(best_model, os.path.join(save_directory, 'best_model_layer5_head5.pt'))
+        if valid_acc > best_acc:
+            best_acc = valid_acc
 
     print("train_acc_array: ", train_acc_array)
     print("valid_acc_array: ", valid_acc_array)
     print("best train accuracy is: {:.4f}".format(best_train_acc))
     print("best validation accuracy is: {:.4f}".format(best_acc))
+    print("best validation pp is: {:.4f}".format(best_pp))
 
     plt.figure()
     plt.title("Training and Validation Accuracy vs. Number of Training Epochs")
