@@ -98,7 +98,7 @@ if __name__ == '__main__':
     emsize = 128
     nhid = 256
     nlayers = 5
-    nhead = 5
+    nhead = 4
     dropout = 0.1
     MyModel = model.TransformerModel(VOCAB_SIZE, emsize, nhead, nhid, nlayers, dropout)
     print(MyModel)
@@ -139,7 +139,7 @@ if __name__ == '__main__':
         if valid_loss < best_pp:
             best_pp = valid_loss
             best_model = MyModel
-            torch.save(best_model, os.path.join(save_directory, 'best_model_layer5_head5.pt'))
+            torch.save(best_model, os.path.join(save_directory, 'best_model_layer5_head4.pt'))
         if valid_acc > best_acc:
             best_acc = valid_acc
 
@@ -157,7 +157,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Transformer_Accuracy_layer5_head5_bptt64_dropout_0_1.jpg')
+    plt.savefig('Transformer_Accuracy_layer5_head4_bptt64_dropout_0_1.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -167,6 +167,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Transformer_Loss_layer5_head5_bptt64_dropout_0_1.jpg')
+    plt.savefig('Transformer_Loss_layer5_head4_bptt64_dropout_0_1.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
