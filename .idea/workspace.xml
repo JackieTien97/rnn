@@ -4,6 +4,8 @@
     <list default="true" id="6d7a4ba6-99d8-45e5-a76c-3592b8d088c6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/start.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transformer_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/transformer_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/transformer_start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/transformer_start.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,8 +36,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2505">
-              <caret line="167" column="35" selection-start-line="167" selection-start-column="35" selection-end-line="167" selection-end-column="35" />
+            <state relative-caret-position="103">
+              <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
               <folding>
                 <element signature="e#16#34#0" expanded="true" />
               </folding>
@@ -55,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/start.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="59" selection-start-column="59" selection-end-column="59" />
+              <caret column="24" lean-forward="true" selection-start-column="24" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -79,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/transformer_main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="122" column="24" lean-forward="true" selection-start-line="122" selection-start-column="24" selection-end-line="122" selection-end-column="24" />
+            <state relative-caret-position="58">
+              <caret line="103" column="18" lean-forward="true" selection-start-line="103" selection-start-column="18" selection-end-line="103" selection-end-column="18" />
               <folding>
                 <element signature="e#16#34#0" expanded="true" />
               </folding>
@@ -88,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/transformer_start.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="83" selection-start-column="83" selection-end-column="83" />
+              <caret column="89" selection-start-column="89" selection-end-column="89" />
             </state>
           </provider>
         </entry>
@@ -125,11 +127,11 @@
         <option value="$PROJECT_DIR$/start.sh" />
         <option value="$PROJECT_DIR$/src/MyRNN.py" />
         <option value="$PROJECT_DIR$/src/test.py" />
-        <option value="$PROJECT_DIR$/src/transformer_start.sh" />
-        <option value="$PROJECT_DIR$/src/transformer_main.py" />
         <option value="$PROJECT_DIR$/src/model.py" />
         <option value="$PROJECT_DIR$/src/main.py" />
         <option value="$PROJECT_DIR$/src/start.sh" />
+        <option value="$PROJECT_DIR$/src/transformer_main.py" />
+        <option value="$PROJECT_DIR$/src/transformer_start.sh" />
       </list>
     </option>
   </component>
@@ -328,12 +330,12 @@
       <workItem from="1587520786392" duration="3221000" />
       <workItem from="1587558131553" duration="30322000" />
       <workItem from="1587809271518" duration="10268000" />
-      <workItem from="1588756516227" duration="4070000" />
+      <workItem from="1588756516227" duration="4374000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47881000" />
+    <option name="totallyTimeSpent" value="48185000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="174" y="23" width="1061" height="877" extended-state="0" />
@@ -353,7 +355,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.37707007" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.37707007" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -557,23 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/transformer_start.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="83" selection-start-column="83" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/transformer_main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="122" column="24" lean-forward="true" selection-start-line="122" selection-start-column="24" selection-end-line="122" selection-end-column="24" />
-          <folding>
-            <element signature="e#16#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -586,8 +571,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2505">
-          <caret line="167" column="35" selection-start-line="167" selection-start-column="35" selection-end-line="167" selection-end-column="35" />
+        <state relative-caret-position="103">
+          <caret line="14" column="9" lean-forward="true" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
           <folding>
             <element signature="e#16#34#0" expanded="true" />
           </folding>
@@ -597,7 +582,24 @@
     <entry file="file://$PROJECT_DIR$/src/start.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="59" selection-start-column="59" selection-end-column="59" />
+          <caret column="24" lean-forward="true" selection-start-column="24" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/transformer_main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="58">
+          <caret line="103" column="18" lean-forward="true" selection-start-line="103" selection-start-column="18" selection-end-line="103" selection-end-column="18" />
+          <folding>
+            <element signature="e#16#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/transformer_start.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="89" selection-start-column="89" selection-end-column="89" />
         </state>
       </provider>
     </entry>
