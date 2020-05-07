@@ -84,7 +84,7 @@ if __name__ == '__main__':
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!START!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-    num_epochs = 100
+    num_epochs = 50
     batch_size = 32
     bptt_len = 64
     SEED = 12345
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     # Build LMModel best_model (build your language best_model here)
     embedding_size = 128
     hidden_size = 256
-    layer_number = 3
+    layer_number = 5
     MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, bidirectional=False)
     print(MyModel)
     MyModel.to(device)
@@ -146,10 +146,10 @@ if __name__ == '__main__':
             best_train_acc = train_acc
         if valid_loss < best_valid_pp:
             best_valid_pp = valid_loss
+            best_model = MyModel
+            torch.save(best_model, os.path.join(save_directory, 'best_model_layer5_bptt64.pt'))
         if valid_acc > best_acc:
             best_acc = valid_acc
-            best_model = MyModel
-            torch.save(best_model, os.path.join(save_directory, 'best_model_bleu_bptt64.pt'))
 
     print("train_acc_array: ", train_acc_array)
     print("valid_acc_array: ", valid_acc_array)
@@ -165,7 +165,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Accuracy_pp_layer3_bptt64.jpg')
+    plt.savefig('Accuracy_pp_layer5_bptt64.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -175,6 +175,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Loss_pp_layer3_bptt64.jpg')
+    plt.savefig('Loss_pp_layer5_bptt64.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")

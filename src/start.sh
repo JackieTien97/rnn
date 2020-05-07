@@ -1,1 +1,1 @@
-nohup python3 -u main.py > log_without_bidirectional.txt 2>&1 &
+nohup python3 -u main.py > log_without_bidirectional_layer5.txt 2>&1 &
