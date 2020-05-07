@@ -74,7 +74,7 @@ if __name__ == '__main__':
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!START!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
-    num_epochs = 100
+    num_epochs = 50
     batch_size = 32
     bptt_len = 64
     SEED = 12345
