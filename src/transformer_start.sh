@@ -1,1 +1,1 @@
-nohup python3 -u transformer_main.py > log_transformer_without_bidirectional_layer2_head8_em256.txt 2>&1 &
+nohup python3 -u transformer_main.py > log_transformer_without_bidirectional_layer3_head2_em256.txt 2>&1 &
