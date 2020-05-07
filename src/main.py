@@ -68,7 +68,7 @@ def train(rnn_model, train_data, optim, sched, device):
         loss = criterion(output.view(-1, VOCAB_SIZE), batch_target.view(-1))
         _, predictions = torch.max(output.view(-1, VOCAB_SIZE), 1)
         loss.backward()
-        torch.nn.utils.clip_grad_norm_(rnn_model.parameters(), GRAD_CLIP)  # CLIP,防止梯度爆炸
+        # torch.nn.utils.clip_grad_norm_(rnn_model.parameters(), GRAD_CLIP)  # CLIP,防止梯度爆炸
         optim.step()
         total_loss += loss.item() * np.multiply(*batch_data.size())
         total_correct += torch.sum(predictions == batch_target.view(-1).data)
@@ -115,14 +115,14 @@ if __name__ == '__main__':
 
     criterion = nn.CrossEntropyLoss()
     learning_rate = 0.001
-    step_size = 20
+    step_size = 10
     optimizer = torch.optim.Adam(MyModel.parameters(), lr=learning_rate)
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=0.3)
     GRAD_CLIP = 0.5
 
     ########################################
 
-    save_directory = '../best_model/without_dropout/'
+    save_directory = '../best_model/without_clip/'
     train_loss_array = []
     train_acc_array = []
     valid_loss_array = []
@@ -165,7 +165,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Accuracy_pp_layer2_bptt64_em256.jpg')
+    plt.savefig('Accuracy_pp_layer2_bptt64_em256_without_clip.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -175,6 +175,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Loss_pp_layer2_bptt64_em256.jpg')
+    plt.savefig('Loss_pp_layer2_bptt64_em256_without_clip.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")

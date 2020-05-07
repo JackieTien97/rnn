@@ -95,7 +95,7 @@ if __name__ == '__main__':
     # WRITE CODE HERE within two '#' bar
     ########################################
     # Build LMModel best_model (build your language best_model here)
-    emsize = 256
+    emsize = 128
     nhid = 256
     nlayers = 3
     nhead = 2
