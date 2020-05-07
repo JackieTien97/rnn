@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
     num_epochs = 50
     batch_size = 32
-    bptt_len = 32
+    bptt_len = 128
     SEED = 12345
 
     print("num_epochs: ", num_epochs)
@@ -139,7 +139,7 @@ if __name__ == '__main__':
         if valid_loss < best_pp:
             best_pp = valid_loss
             best_model = MyModel
-            torch.save(best_model, os.path.join(save_directory, 'best_model_layer2_head2_em256.pt'))
+            torch.save(best_model, os.path.join(save_directory, 'best_model_layer2_bptt128_head2_em256.pt'))
         if valid_acc > best_acc:
             best_acc = valid_acc
 
@@ -157,7 +157,7 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_acc_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Transformer_Accuracy_layer2_head2_em256_dropout_0_2.jpg')
+    plt.savefig('Transformer_Accuracy_layer2_bptt128_head2_em256_dropout_0_2.jpg')
 
     plt.figure()
     plt.title("Training and Validation Loss vs. Number of Training Epochs")
@@ -167,6 +167,6 @@ if __name__ == '__main__':
     plt.plot(range(1, num_epochs + 1), valid_loss_array, label="Validation")
     plt.xticks(np.arange(1, num_epochs + 1, 20.0))
     plt.legend()
-    plt.savefig('Transformer_Loss_layer2_head2_em256_dropout_0_2.jpg')
+    plt.savefig('Transformer_Loss_layer2_bptt128_head2_em256_dropout_0_2.jpg')
 
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!END!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
