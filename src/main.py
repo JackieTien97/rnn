@@ -77,7 +77,7 @@ def train(rnn_model, train_data, optim, sched, device):
     sched.step()
     epoch_loss = total_loss / total_count
     epoch_acc = total_correct.double() / total_count
-    return epoch_loss, epoch_acc.item()
+    return np.exp(epoch_loss), epoch_acc.item()
 
 
 if __name__ == '__main__':
@@ -86,7 +86,7 @@ if __name__ == '__main__':
 
     num_epochs = 50
     batch_size = 32
-    bptt_len = 128
+    bptt_len = 64
     SEED = 12345
 
     print("num_epochs: ", num_epochs)
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     # Build LMModel best_model (build your language best_model here)
     embedding_size = 256
     hidden_size = 256
-    layer_number = 5
+    layer_number = 2
     MyModel = model.LMModel(VOCAB_SIZE, embedding_size, hidden_size, layer_number, bidirectional=False)
     print(MyModel)
     MyModel.to(device)
